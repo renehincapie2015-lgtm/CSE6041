@@ -3,10 +3,10 @@ package eIlumage;
 /**
  * Modela la informaci�n del Producto
  */
-public class Producto {
+public abstract class Producto {
 
     private int codigo;
-    private String nombre;
+    protected String nombre;
     private Caracteristica[] caracteristicas;
     private int count = 0;
     private static int consecutivo = 0;
@@ -27,9 +27,9 @@ public class Producto {
         return codigo;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public abstract String getNombre();
+
+    public abstract String getFullNombre();
 
     /**
      *

@@ -22,10 +22,10 @@ public class Carrito {
      * @param valor
      * @param cantidad
      */
-    public void addArticulo(String nombre, float valor, int cantidad) {
-        articulos[count] = new Articulo(nombre, valor, cantidad);
+    public void addArticulo(Articulo articulo) {
+        articulos[count] = articulo;
+        this.total += articulos[count].getSubTotal();
         this.count++;
-        this.total += valor * cantidad;
     }
 
     /**
@@ -37,19 +37,24 @@ public class Carrito {
         int pos = 0;
         float valor;
         boolean encontrado = false;
+        Stock stock;
+        Producto producto;
 
         while (!encontrado && pos < count) {
-            if (articulos[pos].getProducto().getNombre().equals(nombre)) {
-                valor = Float.parseFloat(articulos[pos].getProducto().getCaracteristica("Valor").getValor());
-                this.total -= valor * articulos[pos].getCantidad();
-                articulos[pos].setCantidad(cantidad);
+            stock = articulos[pos].getStock();
+            producto = stock.getProducto();
+            if (producto.getNombre().equals(nombre)) {
+                valor = Float.parseFloat(producto.getCaracteristica("Valor").getValor());
+                this.total -= valor * stock.getCantidad();
+                stock.setCantidad(cantidad);
                 this.total += valor * cantidad;
                 encontrado = true;
+                break;
             }
             pos++;
-            if (pos == count) {
-                System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
-            }
+        }
+        if (pos == count) {
+            System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
         }
     }
 
@@ -62,14 +67,15 @@ public class Carrito {
         boolean encontrado = false;
 
         while (!encontrado && pos < count) {
-            if (articulos[pos].getProducto().getNombre().equals(nombre)) {
+            if (articulos[pos].getStock().getProducto().getNombre().equals(nombre)) {
                 articulos[pos] = null;
                 encontrado = true;
+                break;
             }
             pos++;
-            if (pos == count) {
-                System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
-            }
+        }
+        if (pos == count) {
+            System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
         }
     }
 
@@ -78,26 +84,30 @@ public class Carrito {
     }
 
     public void updateInventario(Inventario inv) {
+        Stock stock;
 
         for (int i = 0; i < this.count; i++) {
-            inv.getStock(articulos[i].getProducto().getNombre());
-            inv.downStock(articulos[i].getCantidad());
+            stock = articulos[i].getStock();
+            inv.getStock(stock.getProducto().getNombre());
+            inv.downStock(stock.getCantidad());
         }
     }
 
     public String getPedido() {
+        Stock stock;
         String texto = "ILUMAGE le informa que ya fue entregada su compra, que consiste de\n";
-        texto += "Nombre\tValor\tCantidad\tSubTotal\n"
-                + "------\t-------\t---------\t--------\n";
+        texto += "Valor\tCant\tSubTot\tNombre\n"
+                + "------- ------- ------- ------\n";
 
         for (int i = 0; i < this.count; i++) {
-            texto += articulos[i].getProducto().getNombre() + "\t"
-                    + articulos[i].getProducto().getCaracteristica("Valor").getValor() + "\t\t"
-                    + articulos[i].getCantidad() + "\t"
-                    + articulos[i].getSubTotal() + "\n";
+            stock = articulos[i].getStock();
+            texto += stock.getProducto().getCaracteristica("Valor").getValor() + "\t"
+                    + stock.getCantidad() + "\t"
+                    + Float.toString(articulos[i].getSubTotal()) + "\t"
+                    + stock.getProducto().getFullNombre() + "\n";
         }
-        texto += "------\t-------\t---------\t--------\n"
-                + "TOTAL                 \t\t" + this.total;
+        texto += "------- ------- ------- ------\n"
+                + "TOTAL           " + Float.toString(this.total);
         return texto;
     }
 

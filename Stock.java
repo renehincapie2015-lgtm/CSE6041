@@ -25,16 +25,8 @@ public class Stock {
      *
      * @param cantidad
      */
-    public void upCantidad(int cantidad) {
-        this.cantidad += cantidad;
-    }
-
-    /**
-     *
-     * @param cantidad
-     */
-    public void downCantidad(int cantidad) {
-        this.cantidad -= cantidad;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
 }

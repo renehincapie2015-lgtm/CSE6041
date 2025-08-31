@@ -21,15 +21,17 @@ public class Inventario {
         int pos = 0;
         boolean encontrado = false;
 
-        while (!encontrado && pos < count) {
+        while (!encontrado && pos < this.count) {
             if (stocks[pos].getProducto().getNombre().equals(nombre)) {
                 this.stock = stocks[pos];
+                encontrado = true;
+                break;
             }
             pos++;
-            if (pos == count) {
-                this.stock = null;
-                System.out.println("Stock del Producto " + nombre + " no existe o no pertenece a este Inventario");
-            }
+        }
+        if (pos == this.count) {
+            this.stock = null;
+            System.out.println("Stock del Producto " + nombre + " no existe o no pertenece a este Inventario");
         }
     }
 
@@ -39,8 +41,8 @@ public class Inventario {
      * @param valor
      * @param cantidad
      */
-    public void addStock(String nombre, float valor, int cantidad) {
-        stocks[count] = new Stock(new Producto(nombre, valor), cantidad);
+    public void addStock(Producto producto, int cantidad) {
+        stocks[count] = new Stock(producto, cantidad);
         count++;
     }
 
@@ -59,7 +61,7 @@ public class Inventario {
      */
     public void upStock(int cantidad) {
         if (stock != null) {
-            stock.upCantidad(cantidad);
+            stock.setCantidad(stock.getCantidad() + cantidad);
             System.out.println(stock.getProducto().getNombre() + " aumentó en " + cantidad);
         } else {
             System.out.println("No ha consultado un Stock");
@@ -72,7 +74,7 @@ public class Inventario {
      */
     public void downStock(int cantidad) {
         if (stock != null) {
-            stock.downCantidad(cantidad);
+            stock.setCantidad(stock.getCantidad() - cantidad);
             System.out.println(stock.getProducto().getNombre() + " disminuyó en " + cantidad);
         } else {
             System.out.println("No ha consultado un Stock");

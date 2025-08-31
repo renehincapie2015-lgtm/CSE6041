@@ -47,7 +47,7 @@ public class Categoria {
                 return productos[pos];
             }
             pos++;
-            if (pos == count) {
+            if (pos == this.count) {
                 System.out.println("Producto llamado " + nombre + " no existe o no pertenece a esta Categoría");
                 return null;
             }
@@ -59,8 +59,8 @@ public class Categoria {
      * @param nombre
      * @param valor
      */
-    public void addProducto(String nombre, float valor) {
-        productos[count] = new Producto(nombre, valor);
+    public void addProducto(Producto producto) {
+        productos[count] = producto;
         count++;
     }
 

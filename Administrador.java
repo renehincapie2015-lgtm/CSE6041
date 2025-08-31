@@ -27,13 +27,14 @@ public class Administrador extends Usuario {
             if (clientes[pos].getNumeroDocumento() == numeroDocumento) {
                 cliente = clientes[pos];
                 encontrado = true;
+                break;
             }
             pos++;
-            if (pos == count) {
-                cliente = null;
-                pedido = null;
-                System.out.println("No existe el Cliente");
-            }
+        }
+        if (pos == count) {
+            cliente = null;
+            pedido = null;
+            System.out.println("No existe el Cliente");
         }
     }
 
@@ -60,13 +61,14 @@ public class Administrador extends Usuario {
                 cliente = clientes[pos];
                 pedido = cliente.getPedido(codigo);
                 encontrado = true;
+                break;
             }
             pos++;
-            if (pos == count) {
-                cliente = null;
-                pedido = null;
-                System.out.println("No existe el Cliente");
-            }
+        }
+        if (pos == count) {
+            cliente = null;
+            pedido = null;
+            System.out.println("No existe el Cliente");
         }
     }
 
