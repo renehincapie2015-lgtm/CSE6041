@@ -16,17 +16,17 @@ public class Ilumage {
 
         System.out.println("***************");
         System.out.println("Creando los clientes\n");
-        Cliente luza = new Cliente("TI", 1111111111, "Hincapie", "Luz", "CLL 17 # 16 - 39", "3188888888",
-                                   "luzbatista@gmail.com");
-        Cliente patricia = new Cliente("CC", 33333333, "Batista", "Patricia", "CLL 15A # 16A - 30", "3122222222",
-                                   "patriciabatistaluz@hotmail.com");
-        patricia.addFormaPago("Tarjeta Credito");
-        patricia.addFormaPago("Nequi");
+        Cliente bob = new Cliente("TI", 1111111111, "Dylan", "Bob", "CLL 17 # 16 - 39", "3188888888",
+                                   "bobdylan@gmail.com");
+        Cliente alice = new Cliente("CC", 33333333, "Cooper", "Alice", "CLL 15A # 16A - 30", "3122222222",
+                                   "alicecooper@hotmail.com");
+        alice.addFormaPago("Tarjeta Credito");
+        alice.addFormaPago("Nequi");
         
         System.out.println("***************");
         System.out.println("El administrador reconoce los clientes\n");
-        rene.addCliente(luza);
-        rene.addCliente(patricia);
+        rene.addCliente(bob);
+        rene.addCliente(alice);
 
         System.out.println("***************");
         System.out.println("Creando las categorias\n");
@@ -37,36 +37,41 @@ public class Ilumage {
         System.out.println("Creando los inventarios\n");
         Inventario inv = new Inventario();
 
-        ProductoFisico pf = new ProductoFisico("Phone2", 500.00f, 60.5f, "7x11", "Blanco");
-        celulares.addProducto(pf);
-        inv.addStock(pf, 100);
+        ProductoFisico oppo = new ProductoFisico("Android", 500.00f, 60.5f, "7x11", "Blanco");
+        celulares.addProducto(oppo);
+        inv.addStock(oppo, 100);
 
-        pf = new ProductoFisico("Phone1", 100.00f, 54.5f, "6x11", "Negro");
-        celulares.addProducto(pf);
-        inv.addStock(pf, 100);
+        ProductoFisico iphone = new ProductoFisico("iPhone", 100.00f, 54.5f, "6x11", "Negro");
+        celulares.addProducto(iphone);
+        inv.addStock(iphone, 100);
         
-        ProductoDigital pd = new ProductoDigital("Libro1", 399.90f, "MP3", "500MB", "AUC1");
-        audiolibros.addProducto(pd);
-        inv.addStock(pd, 100);
+        ProductoDigital novela = new ProductoDigital("Novela", 399.90f, "MP3", "500MB", "AUC1");
+        audiolibros.addProducto(novela);
+        inv.addStock(novela, 100);
         
-        pd = new ProductoDigital("Libro2", 299.00f, "OGG", "50MB", "DCC2");
-        audiolibros.addProducto(pd);
-        inv.addStock(pd, 100);
+        ProductoDigital ayuda = new ProductoDigital("Autoayuda", 299.00f, "OGG", "50MB", "DCC2");
+        audiolibros.addProducto(ayuda);
+        inv.addStock(ayuda, 100);
         
         System.out.println("********************************");
         System.out.println("*** Un cliente va de compras ***");
         System.out.println("********************************\n");
-        patricia.addCarrito();
-        Carrito carrito= patricia.getCarrito();
-        Articulo articulo = new Articulo(new Stock(pf, 2));
+        alice.addCarrito();
+        Carrito carrito= alice.getCarrito();
+        
+        Articulo articulo = new Articulo(new Stock(oppo, 2));
         carrito.addArticulo(articulo);
-        articulo = new Articulo(new Stock(pd, 3));
-        carrito.addArticulo(articulo);
+        
+        carrito.addArticulo(new ProductoDigital("Novela", 399.90f, "MP3", "500MB", "AUC1"), 2);
+        
+        carrito.addArticulo("iPhone", 100.00f, 54.5f, "6x11", "Negro", 3);
+
+        carrito.addArticulo("Autoayuda", 299.00f, "OGG", "50MB", "DCC2", 3);
 
         System.out.println("********************************");
         System.out.println("*** El cliente va a pagar ******");
         System.out.println("********************************\n");
-        patricia.payCarrito();
+        alice.payCarrito();
 
         System.out.println("\n********************************");
         System.out.println("**** Actualiza Inventario ******");
@@ -76,12 +81,12 @@ public class Ilumage {
         System.out.println("********************************");
         System.out.println("*** Se genera el pedido ********");
         System.out.println("********************************\n");
-        patricia.addPedido("Pagado");
+        alice.addPedido("Pagado");
 
         System.out.println("********************************");
         System.out.println("*** Se desecha el carrito ******");
         System.out.println("********************************\n");
-        patricia.deleteCarrito();
+        alice.deleteCarrito();
 
         System.out.println("********************************");
         System.out.println("*** El administrador procesa ***");

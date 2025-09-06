@@ -20,7 +20,8 @@ public abstract class Producto {
         this.codigo = ++Producto.consecutivo;
         this.nombre = nombre;
         this.caracteristicas = new Caracteristica[5];
-        caracteristicas[count] = new Caracteristica("Valor", Float.toString(valor));
+        caracteristicas[this.count] = new Caracteristica("Valor", Float.toString(valor));
+        this.count++;
     }
 
     public int getCodigo() {

@@ -18,12 +18,51 @@ public class Carrito {
 
     /**
      *
-     * @param nombre
-     * @param valor
-     * @param cantidad
+     * @param articulo
      */
     public void addArticulo(Articulo articulo) {
         articulos[count] = articulo;
+        this.total += articulos[count].getSubTotal();
+        this.count++;
+    }
+
+    /**
+     *
+     * @param producto
+     * @param cantidad
+     */
+    public void addArticulo(Producto producto, int cantidad) {
+        articulos[count] = new Articulo(new Stock(producto, cantidad));
+        this.total += articulos[count].getSubTotal();
+        this.count++;
+    }
+
+    /**
+     *
+     * @param nombre
+     * @param valor
+     * @param peso
+     * @param dimensiones
+     * @param color
+     * @param cantidad
+     */
+    public void addArticulo(String nombre, float valor, float peso, String dimensiones, String color, int cantidad) {
+        articulos[count] = new Articulo(new Stock(new ProductoFisico(nombre, valor, peso, dimensiones, color), cantidad));
+        this.total += articulos[count].getSubTotal();
+        this.count++;
+    }
+
+    /**
+     *
+     * @param nombre
+     * @param valor
+     * @param formatoArchivo
+     * @param tamano
+     * @param codec
+     * @param cantidad
+     */
+    public void addArticulo(String nombre, float valor, String formatoArchivo, String tamano, String codec, int cantidad) {
+        articulos[count] = new Articulo(new Stock(new ProductoDigital(nombre, valor, formatoArchivo, tamano, codec), cantidad));
         this.total += articulos[count].getSubTotal();
         this.count++;
     }

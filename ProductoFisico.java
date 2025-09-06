@@ -18,7 +18,7 @@ public class ProductoFisico extends Producto {
     }
 
     public String getFullNombre() {
-        return this.nombre + " pesa " + this.peso + " (kg), (" + this.dimensiones + " cm2), Color " + this.color;
+        return this.nombre + " pesa " + this.peso + " (kg), mide " + this.dimensiones + " cm2, de color " + this.color;
     }
 
     public float getPeso() {
