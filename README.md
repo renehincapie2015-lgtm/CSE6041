@@ -51,3 +51,32 @@ El mayor desafío se encontró en la sobreescritura de métodos, ya que Producto
 <img width="928" height="182" alt="Polimorfismo11" src="https://github.com/user-attachments/assets/f5f57f81-8342-4328-9b1b-e71c60ce975a" />
 <img width="868" height="176" alt="Polimorfismo12" src="https://github.com/user-attachments/assets/7b776a27-8121-4bb5-ba22-13b7d3ea1035" />
 <img width="729" height="372" alt="Polimorfismo13" src="https://github.com/user-attachments/assets/735cda06-9bf7-48d5-89a2-5cc6366c5044" />
+
+### Semana 5 Encapsulamiento y abstracción
+Se encapsularon los atributos de las clases Producto, Usuario y Carrito. Se agregaron los getters y setters. Se agregaron las validaciones a los constructores y setters. Aclarando que Carrito no tiene variables como nombres y valores, pero llama a los setters de sus clases dependientes, como Articulo. Se modificó la clase Producto para que sea abstracta, y sus métodos abstractos son getNombre y getFullNombre. A su vez, las clases ProductoFisico y ProductoDigital extienden a Producto e implementan ambos métodos abstractos.
+
+![Encapsulacion01](https://github.com/user-attachments/assets/ea33af62-a2ec-4d69-9dda-b0be507c1f4a)
+![Encapsulacion02](https://github.com/user-attachments/assets/9e8632bb-7057-4263-a007-c657d088e289)
+![Encapsulacion03](https://github.com/user-attachments/assets/5708f01d-2749-4e6b-bda4-f0d1f5accfd5)
+![Encapsulacion04](https://github.com/user-attachments/assets/0a0bb567-a7e5-434a-81a2-37d273469ee3)
+![Encapsulacion05](https://github.com/user-attachments/assets/25bd3be9-0191-439e-85cc-8063f6dbd646)
+![Encapsulacion06](https://github.com/user-attachments/assets/11cd7ced-859a-470c-81ab-f8c705dbb25c)
+![Encapsulacion07](https://github.com/user-attachments/assets/450103a0-c9fb-4a3d-bcea-88d3be786d9a)
+![Encapsulacion08](https://github.com/user-attachments/assets/c77a94ed-f09d-43f0-bbbc-142481ecc9b3)
+![Encapsulacion09](https://github.com/user-attachments/assets/e36322d9-43b3-401b-b6c9-3cd08a744359)
+![Encapsulacion10](https://github.com/user-attachments/assets/f3c6cb99-cde4-4fd8-a42c-c8e96661cfb3)
+![Encapsulacion11](https://github.com/user-attachments/assets/cc43c436-4672-40ab-8abc-69af90ad2be7)
+![Encapsulacion12](https://github.com/user-attachments/assets/e97876a9-5c5e-4aee-b0f5-7ec022dcd80e)
+![Encapsulacion13](https://github.com/user-attachments/assets/4a12a479-46a3-428f-b51b-376dd8710a94)
+![Encapsulacion14](https://github.com/user-attachments/assets/10637fca-71a2-453c-b120-ae8c8c941b7a)
+![Encapsulacion15](https://github.com/user-attachments/assets/460a5995-2443-4cdd-ba4a-9490fbc97769)
+![Encapsulacion16](https://github.com/user-attachments/assets/3ae40b1e-5012-4fee-9e43-e758365f0b15)
+![Encapsulacion17](https://github.com/user-attachments/assets/9c9113c7-d4f3-4ef4-be83-e36bc9266df9)
+![Encapsulacion18](https://github.com/user-attachments/assets/3f3cfa8c-e579-4866-a6ae-61f2540b9f02)
+![Encapsulacion19](https://github.com/user-attachments/assets/2a5f3e4d-47a0-464d-811b-dcbafe49c2df)
+![Abstraccion01](https://github.com/user-attachments/assets/ff683db1-7e90-48f9-be12-95ddaeb9570d)
+![Abstraccion02](https://github.com/user-attachments/assets/dc2f5a6c-e38e-4224-bdfd-c49d92790b71)
+![Abstraccion03](https://github.com/user-attachments/assets/3fe659f9-a006-4b1d-a33b-bcb504a41e42)
+![Abstraccion04](https://github.com/user-attachments/assets/2210cf0b-702b-4b8d-9de4-db723532fe37)
+
+
