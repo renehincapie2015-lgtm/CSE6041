@@ -79,4 +79,28 @@ Se encapsularon los atributos de las clases Producto, Usuario y Carrito. Se agre
 ![Abstraccion03](https://github.com/user-attachments/assets/3fe659f9-a006-4b1d-a33b-bcb504a41e42)
 ![Abstraccion04](https://github.com/user-attachments/assets/2210cf0b-702b-4b8d-9de4-db723532fe37)
 
+### Semana 6 Clases Abstractas e Interfaces
 
+Se creó la clase abstracta Inventario, y se crearon las clases concretas InventarioDigital e InventarioFisico. El principal desafío se me presenta en que tengo un modelo de clases bastante relacionado. Por lo que no sólo Inventario se volvió clase abstracta, sino también Producto y Stock. De forma que el Carrito y el main también se cambiaron debido a que ya no se puede instanciar las antiguas Producto, Stock o Inventario, sino las nuevas versiones Digital o Físico.
+![Abstraccion01](https://github.com/user-attachments/assets/f885f4a3-6d5b-42fb-a5e6-c13149f7005d)
+![Abstraccion02](https://github.com/user-attachments/assets/b0c6cc7f-d600-425c-9598-8f3a26ec2520)
+![Abstraccion03](https://github.com/user-attachments/assets/7066b15e-4956-4621-85e1-eedd8117924e)
+![Abstraccion04](https://github.com/user-attachments/assets/0a3482e9-fb33-4ea3-bbd9-6c732c57547b)
+![Abstraccion05](https://github.com/user-attachments/assets/1b2cd1c5-6355-433e-a70f-8d31ee8167f1)
+![Abstraccion06](https://github.com/user-attachments/assets/b90873bb-1a04-4b10-a7da-df874aeaebc7)
+![Abstraccion07](https://github.com/user-attachments/assets/69a9f645-33f3-4178-a782-2bffb62ff8ee)
+![Abstraccion08](https://github.com/user-attachments/assets/1e0104ed-e652-4dbf-8177-68e465592deb)
+![Abstraccion09](https://github.com/user-attachments/assets/d060581d-ad2c-4d1a-a9da-b445c30b3697)
+
+Respecto a la Interfaz, se creó la interfaz IProcesoPago. Luego se crearon tres clases que implementan la interfaz: PagoDebito, PagoCredito y PagoPlataforma. No hubo mayor desafío, aparte de escribir código que distinga a cuál clase se está llamando. Se modificó la clase Cliente, que es desde donde hago los llamados al Proceso de Pago: 
+![Interfaces01](https://github.com/user-attachments/assets/d332ffbe-fbd6-4ee3-9f10-60342172a83b)
+![Interfaces02](https://github.com/user-attachments/assets/dcb22bbc-f3be-4bb6-8bb7-ce80aeedc49f)
+![Interfaces03](https://github.com/user-attachments/assets/eef1aa8f-f453-435f-99e1-ddfd28332384)
+![Interfaces04](https://github.com/user-attachments/assets/5ed3158f-cba3-4588-a0c2-3e8965c13db4)
+![Interfaces05](https://github.com/user-attachments/assets/b81ae7d7-17eb-45c2-b6f3-fc87ae745fc8)
+
+Se adjuntan las modificaciones al diagrama de clases:
+![DC01](https://github.com/user-attachments/assets/231e70af-f2a4-42c8-a4b1-e8cf914e9d0a)
+![DC02](https://github.com/user-attachments/assets/dc355333-2283-4933-9dec-a2ad6bca92bf)
+![DC03](https://github.com/user-attachments/assets/cee3e015-41fd-4c1b-a5e8-8d84ae24026b)
+![DC04](https://github.com/user-attachments/assets/ec34f9cf-4f24-48d5-b2ae-f2e3622ab086)
