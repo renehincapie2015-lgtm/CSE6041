@@ -1,15 +1,19 @@
 package eIlumage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Modela el carro de compras
  */
-public class Carrito {
+public abstract class Carrito implements IObservado {
 
     private int codigo;
-    private Articulo[] articulos;
-    private int count = 0;
-    private float total = Float.parseFloat("0");
+    Articulo[] articulos;
+    int count = 0;
+    float total = Float.parseFloat("0");
     private static int consecutivo = 0;
+    private List<IObservador> observadores = new ArrayList<>();
 
     public Carrito() {
         this.codigo = ++Carrito.consecutivo;
@@ -21,9 +25,12 @@ public class Carrito {
      * @param articulo
      */
     public void addArticulo(Articulo articulo) {
-        articulos[count] = articulo;
-        this.total += articulos[count].getSubTotal();
+        articulos[this.count] = articulo;
+        this.total += articulos[this.count].getSubTotal();
         this.count++;
+        System.out.println("Agregó " + articulo.getStock().getCantidad() + " " +
+                           articulo.getStock().getProducto().getNombre() + " al Carrito");
+        notificar(articulo.getStock().getProducto().getNombre(), articulo.getStock().getCantidad());
     }
 
     /**
@@ -31,41 +38,7 @@ public class Carrito {
      * @param producto
      * @param cantidad
      */
-    public void addArticulo(Producto producto, int cantidad) {
-        articulos[count] = new Articulo(new Stock(producto, cantidad));
-        this.total += articulos[count].getSubTotal();
-        this.count++;
-    }
-
-    /**
-     *
-     * @param nombre
-     * @param valor
-     * @param peso
-     * @param dimensiones
-     * @param color
-     * @param cantidad
-     */
-    public void addArticulo(String nombre, float valor, float peso, String dimensiones, String color, int cantidad) {
-        articulos[count] = new Articulo(new Stock(new ProductoFisico(nombre, valor, peso, dimensiones, color), cantidad));
-        this.total += articulos[count].getSubTotal();
-        this.count++;
-    }
-
-    /**
-     *
-     * @param nombre
-     * @param valor
-     * @param formatoArchivo
-     * @param tamano
-     * @param codec
-     * @param cantidad
-     */
-    public void addArticulo(String nombre, float valor, String formatoArchivo, String tamano, String codec, int cantidad) {
-        articulos[count] = new Articulo(new Stock(new ProductoDigital(nombre, valor, formatoArchivo, tamano, codec), cantidad));
-        this.total += articulos[count].getSubTotal();
-        this.count++;
-    }
+    public abstract void addArticulo(Producto producto, int cantidad);
 
     /**
      *
@@ -78,22 +51,34 @@ public class Carrito {
         boolean encontrado = false;
         Stock stock;
         Producto producto;
+        String mensaje = "";
 
-        while (!encontrado && pos < count) {
-            stock = articulos[pos].getStock();
-            producto = stock.getProducto();
-            if (producto.getNombre().equals(nombre)) {
-                valor = Float.parseFloat(producto.getCaracteristica("Valor").getValor());
-                this.total -= valor * stock.getCantidad();
-                stock.setCantidad(cantidad);
-                this.total += valor * cantidad;
-                encontrado = true;
-                break;
-            }
-            pos++;
+        if (nombre == null || nombre.trim().isEmpty()) {
+            mensaje += "El nombre viene vacío. ";
         }
-        if (pos == count) {
-            System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
+        if (cantidad <= 0) {
+            mensaje += "La cantidad debe ser positiva. ";
+        }
+
+        if (mensaje.trim().isEmpty()) {
+            while (!encontrado && pos < count) {
+                stock = articulos[pos].getStock();
+                producto = stock.getProducto();
+                if (producto.getNombre().equals(nombre)) {
+                    valor = producto.getValor();
+                    this.total -= valor * stock.getCantidad();
+                    stock.setCantidad(cantidad);
+                    this.total += valor * cantidad;
+                    encontrado = true;
+                    break;
+                }
+                pos++;
+            }
+            if (pos == count) {
+                System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
+            }
+        } else {
+            System.out.println(mensaje);
         }
     }
 
@@ -105,31 +90,25 @@ public class Carrito {
         int pos = 0;
         boolean encontrado = false;
 
-        while (!encontrado && pos < count) {
-            if (articulos[pos].getStock().getProducto().getNombre().equals(nombre)) {
-                articulos[pos] = null;
-                encontrado = true;
-                break;
+        if (nombre == null || nombre.trim().isEmpty()) {
+            System.out.println("El nombre viene vacío. ");
+        } else {
+            while (!encontrado && pos < count) {
+                if (articulos[pos].getStock().getProducto().getNombre().equals(nombre)) {
+                    articulos[pos] = null;
+                    encontrado = true;
+                    break;
+                }
+                pos++;
             }
-            pos++;
-        }
-        if (pos == count) {
-            System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
+            if (pos == count) {
+                System.out.println("Artículo llamado " + nombre + " no existe o no pertenece a este Carrito");
+            }
         }
     }
 
     public float getTotal() {
         return this.total;
-    }
-
-    public void updateInventario(Inventario inv) {
-        Stock stock;
-
-        for (int i = 0; i < this.count; i++) {
-            stock = articulos[i].getStock();
-            inv.getStock(stock.getProducto().getNombre());
-            inv.downStock(stock.getCantidad());
-        }
     }
 
     public String getPedido() {
@@ -140,7 +119,7 @@ public class Carrito {
 
         for (int i = 0; i < this.count; i++) {
             stock = articulos[i].getStock();
-            texto += stock.getProducto().getCaracteristica("Valor").getValor() + "\t"
+            texto += stock.getProducto().getValor() + "\t"
                     + stock.getCantidad() + "\t"
                     + Float.toString(articulos[i].getSubTotal()) + "\t"
                     + stock.getProducto().getFullNombre() + "\n";
@@ -153,6 +132,21 @@ public class Carrito {
     public void dumpCarrito() {
         for (int i = 0; i < this.count; i++) {
             articulos[i] = null;
+        }
+    }
+
+    public void agregarObservador(IObservador obs) {
+        observadores.add(obs);
+    }
+
+    public void borrarObservador(IObservador obs) {
+        observadores.remove(obs);
+    }
+
+    @Override
+    public void notificar(String nombre, int cantidad) {
+        for (IObservador o : observadores) {
+            o.actualizar(nombre, cantidad);
         }
     }
 

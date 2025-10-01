@@ -13,10 +13,7 @@ public class ProductoDigital extends Producto {
         this.codec = codec;
     }
 
-    public String getNombre() {
-        return this.nombre;
-    }
-
+    @Override
     public String getFullNombre() {
         return this.nombre + " formato " + this.formatoArchivo + ", (" + this.tamano + "), codec " + this.codec;
     }

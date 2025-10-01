@@ -6,7 +6,8 @@ public class Cliente extends Usuario {
     private int countFormas = 0;
     private Pedido[] pedidos;
     private int countPedidos = 0;
-    private Carrito carrito;
+    private CarritoFisico carritofis;
+    private CarritoDigital carritodig;
 
     /**
      *
@@ -24,7 +25,8 @@ public class Cliente extends Usuario {
                 correoElectronico);
         this.formaPagos = new FormaPago[5];
         this.pedidos = new Pedido[10];
-        this.carrito = new Carrito();
+        this.carritofis = new CarritoFisico();
+        this.carritodig = new CarritoDigital();
 
     }
 
@@ -56,24 +58,46 @@ public class Cliente extends Usuario {
         this.countFormas++;
     }
 
-    public void addCarrito() {
-        this.carrito = new Carrito();
+    public void addCarritoFisico() {
+        this.carritofis = new CarritoFisico();
     }
 
-    public Carrito getCarrito() {
-        return carrito;
+    public void addCarritoDigital() {
+        this.carritodig = new CarritoDigital();
     }
 
-    public void payCarrito() {
-        ProcesoPago pp = new ProcesoPago(formaPagos[0], carrito);
+    public CarritoFisico getCarritoFisico() {
+        return carritofis;
+    }
+
+    public CarritoDigital getCarritoDigital() {
+        return carritodig;
+    }
+
+    public void payCarritoFisico() {
+        IProcesoPago pp = ProcesoPagoFactory.crearPago(formaPagos[0].getNombre(), carritofis.getTotal());
+        
         pp.iniciarPago();
         pp.verificarPago();
         pp.confirmarPago();
     }
 
-    public void deleteCarrito() {
-        this.carrito.dumpCarrito();
-        this.carrito = null;
+    public void payCarritoDigital() {
+        IProcesoPago pp = ProcesoPagoFactory.crearPago(formaPagos[0].getNombre(), carritodig.getTotal());
+        
+        pp.iniciarPago();
+        pp.verificarPago();
+        pp.confirmarPago();
+    }
+
+    public void deleteCarritoFisico() {
+        this.carritofis.dumpCarrito();
+        this.carritofis = null;
+    }
+
+    public void deleteCarritoDigital() {
+        this.carritodig.dumpCarrito();
+        this.carritodig = null;
     }
 
     /**
@@ -99,8 +123,18 @@ public class Cliente extends Usuario {
      *
      * @param estado
      */
-    public void addPedido(String estado) {
-        pedidos[countPedidos] = new Pedido(estado, carrito.getPedido());
+    public void addPedidoFisico(String estado) {
+        pedidos[countPedidos] = new Pedido(estado, carritofis.getPedido());
+        this.countPedidos++;
+        System.out.println("Se creó el Pedido " + (pedidos[countPedidos - 1].getCodigo()) + ", está en " + estado);
+    }
+
+    /**
+     *
+     * @param estado
+     */
+    public void addPedidoDigital(String estado) {
+        pedidos[countPedidos] = new Pedido(estado, carritodig.getPedido());
         this.countPedidos++;
         System.out.println("Se creó el Pedido " + (pedidos[countPedidos - 1].getCodigo()) + ", está en " + estado);
     }

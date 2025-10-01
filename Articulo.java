@@ -14,8 +14,7 @@ public class Articulo {
      */
     public Articulo(Stock stock) {
         this.stock = stock;
-        this.subTotal = Float.parseFloat(this.stock.getProducto().getCaracteristica("Valor").getValor()) *
-                                         this.stock.getCantidad();
+        this.subTotal = this.stock.getProducto().getValor() * this.stock.getCantidad();
     }
 
     public Stock getStock() {
