@@ -104,3 +104,31 @@ Se adjuntan las modificaciones al diagrama de clases:
 ![DC02](https://github.com/user-attachments/assets/dc355333-2283-4933-9dec-a2ad6bca92bf)
 ![DC03](https://github.com/user-attachments/assets/cee3e015-41fd-4c1b-a5e8-8d84ae24026b)
 ![DC04](https://github.com/user-attachments/assets/ec34f9cf-4f24-48d5-b2ae-f2e3622ab086)
+
+### Semana 7 Patrones de diseño Singleton, Factory y Observer
+
+Se creó la clase Configuracion para el diseño Singleton, y mediante esa clase se indica la información de conexión a una base de datos. Se creó la clase ProcesoPagoFactory para el diseño Factory, y mediante esa clase se producen instancias de las clases PagoDebito, PagoCredito y PagoPlataforma. Se crearon las instancias IObservado e IObservador para el diseño Observer. La clase abstracta Inventario implementa IObservador. La clase Carrito implementa IObservado. Pero, como debe determinar si está notificando un inventario digital o físico, la clase Carrito pasa a ser una abstracta y se crean las clases CarritoDigital y CarritoFisico. Se modifica la clase Cliente para gestionar un carrito físico y uno digital. Se modifica el main en concordancia.
+Como desafío se encuentra que la clase Cliente se podría convertir en una abstracta, pero está fuera del alcance de la tarea. Además, el código original hacía que el cliente Alice comprara 4 artículos. Al dividirlo en dos para Alice y dos para Bob, siempre rechazó un artículo en cada uno. Por lo que se dejó en la compra de un artículo por cliente.
+
+![Singleton01](https://github.com/user-attachments/assets/ffccd9c4-a6dd-4ee0-8ec3-2a2441114ea4)
+![Factory01](https://github.com/user-attachments/assets/cfc9b1fe-8d5e-494f-a4fd-7e4d5f4dbfad)
+![Observer02](https://github.com/user-attachments/assets/69926c37-f87d-46f3-acd6-bf6d3272e6ca)
+![Observer01](https://github.com/user-attachments/assets/5c6a26d1-de0f-4ddf-9b84-b11cbb2fadb6)
+![Observer03](https://github.com/user-attachments/assets/22819b4e-23e0-4c0e-a48a-b44309feacfd)
+![Observer04](https://github.com/user-attachments/assets/e9c8b1ce-2722-41c7-a271-04e393e1dafa)
+![Observer05](https://github.com/user-attachments/assets/56db1589-c848-4e21-a9d5-9bc482fda7ed)
+![Observer06](https://github.com/user-attachments/assets/8ac7a0f1-354c-4ac6-8f11-ff5c5f7d147a)
+![Observer07](https://github.com/user-attachments/assets/41d3fbea-549f-4c04-824e-d5fc32288b19)
+![Observer08](https://github.com/user-attachments/assets/ddbd4b9a-5515-4271-a648-272cb0ce3bad)
+![Observer09](https://github.com/user-attachments/assets/0859dcca-c0c7-4581-a9b6-5eba91de8657)
+![Observer10](https://github.com/user-attachments/assets/418f5193-d739-45f9-8ea6-711244a29059)
+![Tarea701](https://github.com/user-attachments/assets/5c97f47d-a93d-4362-a5d2-f76f072fe40a)
+![Tarea702](https://github.com/user-attachments/assets/6af50f0d-ebf4-46ef-ab80-975dd4a5d740)
+![Tarea703](https://github.com/user-attachments/assets/744ece87-ede8-4c59-ade5-ee9904da3a4b)
+![Tarea704](https://github.com/user-attachments/assets/a12f5794-2441-4b15-92f4-60f2977ab990)
+
+Se adjuntan las modificaciones al diagrama de clases:
+![DC05](https://github.com/user-attachments/assets/66135efa-de43-4978-a424-36cc6b9b9d4e)
+![DC06](https://github.com/user-attachments/assets/16975a58-46d9-4e2d-ad8d-4acc5b70f655)
+![DC07](https://github.com/user-attachments/assets/f81abc40-3b80-496a-9727-9ad6749e81fd)
+![DC078](https://github.com/user-attachments/assets/be885702-7ce1-4885-9b25-b13299bdfc3d)

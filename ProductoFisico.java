@@ -13,10 +13,7 @@ public class ProductoFisico extends Producto {
         this.color = color;
     }
 
-    public String getNombre() {
-        return this.nombre;
-    }
-
+    @Override
     public String getFullNombre() {
         return this.nombre + " pesa " + this.peso + " (kg), mide " + this.dimensiones + " cm2, de color " + this.color;
     }

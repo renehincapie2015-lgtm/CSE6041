@@ -1,25 +1,11 @@
 package eIlumage;
 
 /**
- * Modela cu�ntos Productos hay en el Inventario
+ * Modela cuantos Productos hay en el Inventario
  */
-public class Stock {
+public abstract class Stock {
 
-    private Producto producto;
     private int cantidad = 0;
-
-    public Stock(Producto producto, int cantidad) {
-        this.producto = producto;
-        this.cantidad = cantidad;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
 
     /**
      *
@@ -28,5 +14,17 @@ public class Stock {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     *
+     * @param producto
+     */
+    public abstract void setProducto(Producto producto);
+
+    public abstract Producto getProducto();
 
 }

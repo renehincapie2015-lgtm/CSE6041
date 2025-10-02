@@ -10,18 +10,25 @@ public class Ilumage {
         System.out.println("***************\n");
         
         System.out.println("***************");
+        System.out.println("Conectando a la base de datos\n");
+        Configuracion config = Configuracion.getInstancia();
+        System.out.println("Usuario = " + config.getUsuarioBD());
+        System.out.println("Contraseña = " + config.getContrasenaBD());
+        System.out.println("Conexion = " + config.getConexionBD());
+
+        System.out.println("***************");
         System.out.println("Creando el administrador\n");
         Administrador rene = new Administrador("CC", 77777777, "Hincapie", "Rene",
-            "CLL 17 # 16 - 39", "3011111111", "renehincapie@hotmai.com");
+            "Calle 17 # 16-39", "3011111111", "renehincapie@hotmai.com");
 
         System.out.println("***************");
         System.out.println("Creando los clientes\n");
-        Cliente bob = new Cliente("TI", 1111111111, "Dylan", "Bob", "CLL 17 # 16 - 39", "3188888888",
-                                   "bobdylan@gmail.com");
-        Cliente alice = new Cliente("CC", 33333333, "Cooper", "Alice", "CLL 15A # 16A - 30", "3122222222",
-                                   "alicecooper@hotmail.com");
-        alice.addFormaPago("Tarjeta Credito");
-        alice.addFormaPago("Nequi");
+        Cliente alice = new Cliente("CC", 33333333, "Cooper", "Alice", "Calle 15 # 16-30", "3122222222", "alicecooper@hotmail.com");
+        alice.addFormaPago("Credito");
+        alice.addFormaPago("Plataforma");
+        Cliente bob = new Cliente("TI", 1111111111, "Dylan", "Bob", "Calle 17 # 16-39", "3188888888", "bobdylan@gmail.com");
+        bob.addFormaPago("Plataforma");
+        bob.addFormaPago("Debito");
         
         System.out.println("***************");
         System.out.println("El administrador reconoce los clientes\n");
@@ -34,72 +41,106 @@ public class Ilumage {
         Categoria audiolibros = new Categoria("Audiolibros");
         
         System.out.println("***************");
-        System.out.println("Creando los inventarios\n");
-        Inventario inv = new Inventario();
+        System.out.println("Creando inventario físico\n");
+        InventarioFisico invfis = new InventarioFisico();
+        invfis.iniciar();
+        StockFisico stockfis = new StockFisico();
 
-        ProductoFisico oppo = new ProductoFisico("Android", 500.00f, 60.5f, "7x11", "Blanco");
+/*        ProductoFisico oppo = new ProductoFisico("Android", 500.00f, 60.5f, "7x11", "Blanco");
         celulares.addProducto(oppo);
-        inv.addStock(oppo, 100);
+        stockfis.setProducto(oppo);
+        stockfis.setCantidad(100);
+        invfis.addStock(stockfis);*/
 
         ProductoFisico iphone = new ProductoFisico("iPhone", 100.00f, 54.5f, "6x11", "Negro");
         celulares.addProducto(iphone);
-        inv.addStock(iphone, 100);
+        stockfis.setProducto(iphone);
+        stockfis.setCantidad(100);
+        invfis.addStock(stockfis);
+        
+        System.out.println("***************");
+        System.out.println("Creando inventario digital\n");
+        InventarioDigital invdig = new InventarioDigital();
+        invdig.iniciar();
+        StockDigital stockdig = new StockDigital();
+
+/*        ProductoDigital ayuda = new ProductoDigital("Autoayuda", 299.00f, "OGG", "50MB", "DCC2");
+        audiolibros.addProducto(ayuda);
+        stockdig.setProducto(ayuda);
+        stockdig.setCantidad(100);
+        invdig.addStock(stockdig);*/
         
         ProductoDigital novela = new ProductoDigital("Novela", 399.90f, "MP3", "500MB", "AUC1");
         audiolibros.addProducto(novela);
-        inv.addStock(novela, 100);
-        
-        ProductoDigital ayuda = new ProductoDigital("Autoayuda", 299.00f, "OGG", "50MB", "DCC2");
-        audiolibros.addProducto(ayuda);
-        inv.addStock(ayuda, 100);
+        stockdig.setProducto(novela);
+        stockdig.setCantidad(100);
+        invdig.addStock(stockdig);
         
         System.out.println("********************************");
-        System.out.println("*** Un cliente va de compras ***");
+        System.out.println("*** Alice va de compra fisica ***");
         System.out.println("********************************\n");
-        alice.addCarrito();
-        Carrito carrito= alice.getCarrito();
+        alice.addCarritoFisico();
+        CarritoFisico carritofis = alice.getCarritoFisico();
+        carritofis.agregarObservador(invfis);
         
-        Articulo articulo = new Articulo(new Stock(oppo, 2));
-        carrito.addArticulo(articulo);
+        carritofis.addArticulo("iPhone", 100.00f, 54.5f, "6x11", "Negro", 3);
+/*        stockfis.setProducto(oppo);
+        stockfis.setCantidad(2);
+        Articulo articulo = new Articulo(stockfis);
+        carritofis.addArticulo(articulo);*/
         
-        carrito.addArticulo(new ProductoDigital("Novela", 399.90f, "MP3", "500MB", "AUC1"), 2);
-        
-        carrito.addArticulo("iPhone", 100.00f, 54.5f, "6x11", "Negro", 3);
+        System.out.println("********************************");
+        System.out.println("*** Bob va de compra digital ***");
+        System.out.println("********************************\n");
+        bob.addCarritoDigital();
+        CarritoDigital carritodig = bob.getCarritoDigital();
+        carritodig.agregarObservador(invdig);
 
-        carrito.addArticulo("Autoayuda", 299.00f, "OGG", "50MB", "DCC2", 3);
+/*        carritodig.addArticulo("Autoayuda", 299.00f, "OGG", "50MB", "DCC2", 3);*/
+        carritodig.addArticulo(new ProductoDigital("Novela", 399.90f, "MP3", "500MB", "AUC1"), 2);
 
         System.out.println("********************************");
-        System.out.println("*** El cliente va a pagar ******");
+        System.out.println("********   Alice paga   ********");
         System.out.println("********************************\n");
-        alice.payCarrito();
+        alice.payCarritoFisico();
+        System.out.println("********************************");
+        System.out.println("********    Bob paga    ********");
+        System.out.println("********************************\n");
+        bob.payCarritoDigital();
 
-        System.out.println("\n********************************");
-        System.out.println("**** Actualiza Inventario ******");
-        System.out.println("********************************\n");
-        carrito.updateInventario(inv);
+        System.out.println("*****************************************");
+        System.out.println("*** Los clientes generan pedidos ********");
+        System.out.println("*****************************************\n");
+        alice.addPedidoFisico("Pagado");
+        bob.addPedidoDigital("Pagado");
 
         System.out.println("********************************");
-        System.out.println("*** Se genera el pedido ********");
+        System.out.println("*** Se desecha los carritos ******");
         System.out.println("********************************\n");
-        alice.addPedido("Pagado");
+        alice.deleteCarritoFisico();
+        bob.deleteCarritoDigital();
 
         System.out.println("********************************");
-        System.out.println("*** Se desecha el carrito ******");
-        System.out.println("********************************\n");
-        alice.deleteCarrito();
-
-        System.out.println("********************************");
-        System.out.println("*** El administrador procesa ***");
+        System.out.println("*** El administrador procesa a Alice ***");
         System.out.println("********************************\n");
         rene.getPedido(33333333, 1);
         rene.setEstadoPedido("Empacado");
         rene.setEstadoPedido("Enviado");
         rene.setEstadoPedido("En ruta");
         rene.setEstadoPedido("Entregado");
+        System.out.println("********************************");
+        rene.sendSMSPedido();
 
         System.out.println("********************************");
-        System.out.println("*** El administrador informa ***");
+        System.out.println("*** El administrador procesa a Bob ***");
         System.out.println("********************************\n");
+        rene.getPedido(1111111111, 2);
+        rene.setEstadoPedido("Empacado");
+        rene.setEstadoPedido("Enviado");
+        rene.setEstadoPedido("En ruta");
+        rene.setEstadoPedido("Entregado");
+        System.out.println("********************************");
         rene.sendSMSPedido();
+
     }
 }
