@@ -132,3 +132,40 @@ Se adjuntan las modificaciones al diagrama de clases:
 ![DC06](https://github.com/user-attachments/assets/16975a58-46d9-4e2d-ad8d-4acc5b70f655)
 ![DC07](https://github.com/user-attachments/assets/f81abc40-3b80-496a-9727-9ad6749e81fd)
 ![DC078](https://github.com/user-attachments/assets/be885702-7ce1-4885-9b25-b13299bdfc3d)
+
+
+### Semana 8 Manejo de Excepciones y Pruebas Unitarias
+
+####Manejo de Excepciones:
+Se agregaron excepciones básicas como controlar cantidades o precios negativos, formatos no cumplidos, argumentos vacíos, inventarios mayores al límite. Como desafío queda el que hay muchas validaciones y excepciones similares, por lo que sería mejor una clase Validador que centralice los controles, pero queda por fuera del alcance de la tarea.
+
+![Excepcion01](https://github.com/user-attachments/assets/460bacfc-ea21-46a7-96c8-6b04f0f65d13)
+![Excepcion02](https://github.com/user-attachments/assets/ed41e6da-ee8c-47b9-b56c-7b3a1c447ca7)
+![Excepcion03](https://github.com/user-attachments/assets/d4bfc293-dc75-4a03-a99d-73949bf4bcda)
+![Excepcion04](https://github.com/user-attachments/assets/ad47c925-ee25-4046-b634-c3a16856b2c6)
+![Excepcion05](https://github.com/user-attachments/assets/8149576e-b34d-44df-95d6-20187183370f)
+![Excepcion06](https://github.com/user-attachments/assets/0387aea4-5f54-4789-9ada-fc299f9274f2)
+![Excepcion07](https://github.com/user-attachments/assets/2acdcd58-15d7-47e7-afcc-8c3edfdcb0b9)
+![Excepcion08](https://github.com/user-attachments/assets/1f24d521-0646-44ba-8c41-be4bf5f1f114)
+![Excepcion09](https://github.com/user-attachments/assets/42eed605-93e1-43c7-8922-c948a40f98d9)
+![Excepcion10](https://github.com/user-attachments/assets/eb740049-2cbd-4f14-a9f8-b449bad3e31e)
+![Excepcion11](https://github.com/user-attachments/assets/9e497328-6fd1-488d-a3e6-988cc0bf4f60)
+![Excepcion12](https://github.com/user-attachments/assets/126830d9-938c-4bea-bf3b-d2680110070c)
+![Excepcion13](https://github.com/user-attachments/assets/a1a951c8-e468-469f-9a1d-5cc6a7496139)
+
+####Pruebas Unitarias:
+Hubo varios desafíos con este punto. Primero se detectó que la última versión de JUnit, la 5, no corre nativamente con el Builder estándar de Apache NetBeans, que es Ant, y se deben hacer más ajustes. Tocaría instalar los Builders Maven o Gradle, con los que sí es compatible. No se dispone de tiempo para realizar más instalaciones, pero se logra encontrar la solución de realizar tests con JUnit 4, lo cual permite hacer pruebas más rápido y sin instalaciones adicionales. El segundo y más grande desafío es que al probar algunas clases por fuera de la aplicación empezaron a fallar y la primera solución consistió en seguir separando métodos en versión Digital y Física, lo que retrasa más la entrega. Esto incluye que el main ya no realiza llamados a los carritos, sino la clase Cliente se encarga de sus carritos. Y, en tercer lugar, sin detectarse la causa real, los productos al agregarse a sus respectivos carritos quedaban con valor cero, sin afectar los demás atributos. Se tuvo que crear un método adicional en cada carrito para asignar nuevamente el valor.
+![JUnit01](https://github.com/user-attachments/assets/717bc8ef-4c4a-4638-b81e-861313384042)
+![JUnit02](https://github.com/user-attachments/assets/df3881b1-8b6c-4186-b820-27439ccbd64d)
+![JUnit03](https://github.com/user-attachments/assets/e2ba28de-09ac-42f8-be78-d76aad1ae4fd)
+![JUnit04](https://github.com/user-attachments/assets/46bb7fa6-d1dc-471e-851b-fdb0c98856a9)
+![JUnit05](https://github.com/user-attachments/assets/f8dc2f3b-2219-438f-84d2-4d3a7de984d2)
+![JUnit06](https://github.com/user-attachments/assets/b6ff9444-d6a5-41ec-9ae5-5bc914c50114)
+![JUnit07](https://github.com/user-attachments/assets/714756ed-a502-424e-b66a-a5f775007c69)
+![JUnit08](https://github.com/user-attachments/assets/dfa6fdc6-2ca0-45bf-9221-bdf914f927c7)
+![JUnit09](https://github.com/user-attachments/assets/5486a1dc-58a4-4640-bc34-e6a746c51579)
+![JUnit10](https://github.com/user-attachments/assets/9068daf9-b2bf-4361-8b37-d9baa232ebf4)
+![JUnit11](https://github.com/user-attachments/assets/079296a5-1520-4acc-8f50-e3f3f7edb527)
+![JUnit12](https://github.com/user-attachments/assets/c59d31a1-8298-4114-822d-5e6beb747ee0)
+![JUnit13](https://github.com/user-attachments/assets/84d8f2a6-89d4-4a4e-94ff-1d84232be5c9)
+![JUnit14](https://github.com/user-attachments/assets/b3ea03e0-17b8-422c-8a33-f1b33af3466d)
