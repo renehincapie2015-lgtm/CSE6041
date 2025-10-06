@@ -8,9 +8,9 @@ public class ProductoDigital extends Producto {
 
     public ProductoDigital(String nombre, float valor, String formatoArchivo, String tamano, String codec) {
         super(nombre, valor);
-        this.formatoArchivo = formatoArchivo;
-        this.tamano = tamano;
-        this.codec = codec;
+        setFormatoArchivo(formatoArchivo);
+        setTamano(tamano);
+        setCodec(codec);
     }
 
     @Override
@@ -23,6 +23,9 @@ public class ProductoDigital extends Producto {
     }
 
     public void setFormatoArchivo(String formatoArchivo) {
+        if (formatoArchivo == null || formatoArchivo.trim().isEmpty()) {
+            throw new IllegalArgumentException("El formato de archivo viene vacío");
+        }
         this.formatoArchivo = formatoArchivo;
     }
 
@@ -31,6 +34,9 @@ public class ProductoDigital extends Producto {
     }
 
     public void setTamano(String tamano) {
+        if (tamano == null || tamano.trim().isEmpty()) {
+            throw new IllegalArgumentException("El tamaño viene vacío");
+        }
         this.tamano = tamano;
     }
 
@@ -39,6 +45,9 @@ public class ProductoDigital extends Producto {
     }
 
     public void setCodec(String codec) {
+        if (codec == null || codec.trim().isEmpty()) {
+            throw new IllegalArgumentException("El codec viene vacío");
+        }
         this.codec = codec;
     }
     

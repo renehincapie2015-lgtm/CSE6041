@@ -12,7 +12,7 @@ public class FormaPago {
      */
     public FormaPago(String nombre) {
         this.codigo = ++FormaPago.consecutivo;
-        this.nombre = nombre;
+        setNombre(nombre);
     }
 
     public int getCodigo() {
@@ -27,7 +27,10 @@ public class FormaPago {
      *
      * @param nombre
      */
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws IllegalArgumentException {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre viene vacío");
+        }
         this.nombre = nombre;
     }
 

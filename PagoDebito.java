@@ -10,7 +10,13 @@ public class PagoDebito implements IProcesoPago {
      * @param nombre
      * @param total
      */
-    public PagoDebito(String nombre, float total) {
+    public PagoDebito(String nombre, float total) throws IllegalArgumentException {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre viene vacío");
+        }
+        if (total <= 0.0f) {
+            throw new IllegalArgumentException("El total debe ser positivo");
+        }
         this.nombre = nombre;
         this.total = total;
     }

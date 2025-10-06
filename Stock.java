@@ -19,12 +19,4 @@ public abstract class Stock {
         return cantidad;
     }
 
-    /**
-     *
-     * @param producto
-     */
-    public abstract void setProducto(Producto producto);
-
-    public abstract Producto getProducto();
-
 }

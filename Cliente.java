@@ -34,19 +34,20 @@ public class Cliente extends Usuario {
      *
      * @param nombre
      */
-    public FormaPago getFormaPago(String nombre) {
+    public FormaPago getFormaPago(String nombre) throws IllegalArgumentException {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre viene vacío");
+        }
         int pos = 0;
 
-        while (true) {
+        while (pos < countFormas) {
             if (formaPagos[pos].getNombre().equals(nombre)) {
                 return formaPagos[pos];
             }
             pos++;
-            if (pos == countFormas) {
-                System.out.println("Forma de Pago llamada " + nombre + " no existe o no pertenece a este Cliente");
-                return null;
-            }
         }
+        System.out.println("Forma de Pago llamada " + nombre + " no existe o no pertenece a este Cliente");
+        return null;
     }
 
     /**
@@ -54,6 +55,9 @@ public class Cliente extends Usuario {
      * @param nombre
      */
     public void addFormaPago(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre viene vacío");
+        }
         formaPagos[countFormas] = new FormaPago(nombre);
         this.countFormas++;
     }
@@ -66,25 +70,49 @@ public class Cliente extends Usuario {
         this.carritodig = new CarritoDigital();
     }
 
-    public CarritoFisico getCarritoFisico() {
-        return carritofis;
+    public void agregarObservador(Inventario inv) {
+        if (inv instanceof InventarioFisico) {
+            carritofis.agregarObservador((InventarioFisico) inv);
+        } else if (inv instanceof InventarioDigital) {
+            carritodig.agregarObservador((InventarioDigital) inv);
+        }
     }
 
-    public CarritoDigital getCarritoDigital() {
-        return carritodig;
+    public void addArticulo(String nombre, float valor, float peso, String dimensiones, String color, int cantidad) {
+        carritofis.addArticulo(nombre, valor, peso, dimensiones, color, cantidad);
+    }
+
+    public void addArticulo(ProductoDigital producto, int cantidad) {
+        carritodig.addArticulo(producto, cantidad);
+    }
+
+    public float getTotalFisico() {
+        return carritofis.getTotal();
+    }
+
+    public float getTotalDigital() {
+        return carritodig.getTotal();
+    }
+
+    public void setValorArticuloFisico(String nombre, float valor) {
+        carritofis.setValorArticulo(nombre, valor);
+    }
+
+    public void setValorArticuloDigital(String nombre, float valor) {
+        carritodig.setValorArticulo(nombre, valor);
     }
 
     public void payCarritoFisico() {
-        IProcesoPago pp = ProcesoPagoFactory.crearPago(formaPagos[0].getNombre(), carritofis.getTotal());
-        
+        IProcesoPago pp = ProcesoPagoFactory.crearPago(formaPagos[0].getNombre(), getTotalFisico());
+
         pp.iniciarPago();
         pp.verificarPago();
         pp.confirmarPago();
     }
 
     public void payCarritoDigital() {
-        IProcesoPago pp = ProcesoPagoFactory.crearPago(formaPagos[0].getNombre(), carritodig.getTotal());
-        
+        IProcesoPago pp = ProcesoPagoFactory.crearPago(formaPagos[0].getNombre(), getTotalDigital());
+
         pp.iniciarPago();
         pp.verificarPago();
         pp.confirmarPago();
@@ -104,7 +132,10 @@ public class Cliente extends Usuario {
      *
      * @param codigo
      */
-    public Pedido getPedido(int codigo) {
+    public Pedido getPedido(int codigo) throws IllegalArgumentException {
+        if (codigo <= 0) {
+            throw new IllegalArgumentException("El código debe ser positivo");
+        }
         int pos = 0;
 
         while (true) {
@@ -123,7 +154,10 @@ public class Cliente extends Usuario {
      *
      * @param estado
      */
-    public void addPedidoFisico(String estado) {
+    public void addPedidoFisico(String estado) throws IllegalArgumentException {
+        if (estado == null || estado.trim().isEmpty()) {
+            throw new IllegalArgumentException("El estado viene vacío");
+        }
         pedidos[countPedidos] = new Pedido(estado, carritofis.getPedido());
         this.countPedidos++;
         System.out.println("Se creó el Pedido " + (pedidos[countPedidos - 1].getCodigo()) + ", está en " + estado);
@@ -133,7 +167,10 @@ public class Cliente extends Usuario {
      *
      * @param estado
      */
-    public void addPedidoDigital(String estado) {
+    public void addPedidoDigital(String estado) throws IllegalArgumentException {
+        if (estado == null || estado.trim().isEmpty()) {
+            throw new IllegalArgumentException("El estado viene vacío");
+        }
         pedidos[countPedidos] = new Pedido(estado, carritodig.getPedido());
         this.countPedidos++;
         System.out.println("Se creó el Pedido " + (pedidos[countPedidos - 1].getCodigo()) + ", está en " + estado);

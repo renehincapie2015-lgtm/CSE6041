@@ -34,41 +34,13 @@ public class Usuario {
             String direccion, String celular, String correoElectronico) {
 
         this.codigo = ++Usuario.consecutivo;
-        if (tipoDocumento == null || tipoDocumento.trim().isEmpty()) {
-            System.out.println("El tipo de documento viene vacío");
-        } else {
-            this.tipoDocumento = tipoDocumento.trim();
-        }
-        if (numeroDocumento <= 0) {
-            System.out.println("El número de documento debe ser positivo");
-        } else {
-            this.numeroDocumento = numeroDocumento;
-        }
-        if (apellidos == null || apellidos.trim().isEmpty()) {
-            System.out.println("Los apellidos vienen vacíos");
-        } else {
-            this.apellidos = apellidos.trim();
-        }
-        if (nombres == null || nombres.trim().isEmpty()) {
-            System.out.println("Los nombres vienen vacíos");
-        } else {
-            this.nombres = nombres.trim();
-        }
-        if (direccion != null && direccion.trim().matches(regexdir)) {
-            this.direccion = direccion;
-        } else {
-            System.out.println("La dirección viene vacía o está mal formateada");
-        }
-        if (celular != null && celular.replaceAll("[\\s-]", "").trim().matches(regexcel)) {
-            this.celular = celular.replaceAll("[\\s-]", "").trim();
-        } else {
-            System.out.println("El celular viene vacío o está mal formateado");
-        }
-        if (correoElectronico != null && correoElectronico.trim().matches(regexemail)) {
-            this.correoElectronico = correoElectronico.trim();
-        } else {
-            System.out.println("El correo electrónico viene vacío o está mal formateado");
-        }
+        setTipoDocumento(tipoDocumento);
+        setNumeroDocumento(numeroDocumento);
+        setApellidos(apellidos);
+        setNombres(nombres);
+        setDireccion(direccion);
+        setCelular(celular);
+        setCorreoElectronico(correoElectronico);
         this.claveAcceso = this.nombres.substring(0, 2) + this.celular.substring(6, 9)
                 + this.apellidos + Integer.toString(this.codigo);
     }
@@ -85,84 +57,86 @@ public class Usuario {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
+    public void setTipoDocumento(String tipoDocumento) throws IllegalArgumentException {
         if (tipoDocumento == null || tipoDocumento.trim().isEmpty()) {
-            System.out.println("El tipo de documento viene vacío");
-        } else {
-            this.tipoDocumento = tipoDocumento.trim();
+            throw new IllegalArgumentException("El tipo de documento viene vacío");
         }
+        this.tipoDocumento = tipoDocumento.trim();
     }
 
     public int getNumeroDocumento() {
         return numeroDocumento;
     }
 
-    public void setNumeroDocumento(int numeroDocumento) {
+    public void setNumeroDocumento(int numeroDocumento) throws IllegalArgumentException {
         if (numeroDocumento <= 0) {
-            System.out.println("El número de documento debe ser positivo");
-        } else {
-            this.numeroDocumento = numeroDocumento;
+            throw new IllegalArgumentException("El número de documento debe ser positivo");
         }
+        this.numeroDocumento = numeroDocumento;
     }
 
     public String getApellidos() {
         return apellidos;
     }
 
-    public void setApellidos(String apellidos) {
+    public void setApellidos(String apellidos) throws IllegalArgumentException {
         if (apellidos == null || apellidos.trim().isEmpty()) {
-            System.out.println("Los apellidos vienen vacíos");
-        } else {
-            this.apellidos = apellidos.trim();
+            throw new IllegalArgumentException("Los apellidos vienen vacíos");
         }
+        this.apellidos = apellidos.trim();
     }
 
     public String getNombres() {
         return nombres;
     }
 
-    public void setNombres(String nombres) {
+    public void setNombres(String nombres) throws IllegalArgumentException {
         if (nombres == null || nombres.trim().isEmpty()) {
-            System.out.println("Los nombres vienen vacíos");
-        } else {
-            this.nombres = nombres.trim();
+            throw new IllegalArgumentException("Los nombres vienen vacíos");
         }
+        this.nombres = nombres.trim();
     }
 
     public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
-        if (direccion != null && direccion.trim().matches(regexdir)) {
-            this.direccion = direccion;
-        } else {
-            System.out.println("La dirección viene vacía o está mal formateada");
+    public void setDireccion(String direccion) throws IllegalArgumentException {
+        if (direccion == null || direccion.trim().isEmpty()) {
+            throw new IllegalArgumentException("La dirección viene vacía");
         }
+        if (!direccion.trim().matches(regexdir)) {
+            throw new IllegalArgumentException("La dirección está mal formateada");
+        }
+        this.direccion = direccion;
     }
 
     public String getCelular() {
         return celular;
     }
 
-    public void setCelular(String celular) {
-        if (celular != null && celular.replaceAll("[\\s-]", "").trim().matches(regexcel)) {
-            this.celular = celular.replaceAll("[\\s-]", "").trim();
-        } else {
-            System.out.println("El celular viene vacío o está mal formateado");
+    public void setCelular(String celular) throws IllegalArgumentException {
+        if (celular == null || celular.trim().isEmpty()) {
+            throw new IllegalArgumentException("El celular viene vacío");
         }
+        if (!celular.replaceAll("[\\s-]", "").trim().matches(regexcel)) {
+            throw new IllegalArgumentException("El celular está mal formateado");
+        }
+        this.celular = celular.replaceAll("[\\s-]", "").trim();
     }
 
     public String getCorreoElectronico() {
         return correoElectronico;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        if (correoElectronico != null && correoElectronico.trim().matches(regexemail)) {
-            this.correoElectronico = correoElectronico.trim();
-        } else {
-            System.out.println("El correo electrónico viene vacío o está mal formateado");
+    public void setCorreoElectronico(String correoElectronico) throws IllegalArgumentException {
+        if (correoElectronico == null || correoElectronico.trim().isEmpty()) {
+            throw new IllegalArgumentException("El correo electrónico viene vacío");
         }
+        if (!correoElectronico.trim().matches(regexemail)) {
+            throw new IllegalArgumentException("El correo electrónico está mal formateado");
+        }
+        this.correoElectronico = correoElectronico.trim();
     }
 
     /**
@@ -171,6 +145,9 @@ public class Usuario {
      * @return
      */
     public boolean esClaveCorrecta(String claveAcceso) {
+        if (claveAcceso == null || claveAcceso.trim().isEmpty()) {
+            throw new IllegalArgumentException("La clave viene vacía");
+        }
         if (this.claveAcceso.equals(claveAcceso)) {
             return true;
         } else {
@@ -185,6 +162,12 @@ public class Usuario {
     }
 
     public void setClaveAcceso(String claveAccesoVieja, String claveAccesoNueva) {
+        if (claveAccesoVieja == null || claveAccesoVieja.trim().isEmpty()) {
+            throw new IllegalArgumentException("La clave anterior viene vacía");
+        }
+        if (claveAccesoNueva == null || claveAccesoNueva.trim().isEmpty()) {
+            throw new IllegalArgumentException("La clave nueva viene vacía");
+        }
         if (esClaveCorrecta(claveAccesoVieja)) {
             this.claveAcceso = claveAccesoNueva;
             System.out.println("Clave correctamente actualizada");

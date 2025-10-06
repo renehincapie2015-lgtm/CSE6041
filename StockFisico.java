@@ -8,15 +8,11 @@ public class StockFisico extends Stock {
      *
      * @param producto
      */
-    @Override
-    public void setProducto(Producto producto) {
-        if (producto instanceof ProductoFisico) {
-            this.producto = (ProductoFisico) producto;
-        }
+    public void setProducto(ProductoFisico producto) {
+        this.producto = producto;
     }
 
-    @Override
-    public Producto getProducto() {
+    public ProductoFisico getProducto() {
         return producto;
     }
 

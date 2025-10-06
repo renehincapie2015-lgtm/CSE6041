@@ -8,15 +8,11 @@ public class StockDigital extends Stock {
      *
      * @param producto
      */
-    @Override
-    public void setProducto(Producto producto) {
-        if (producto instanceof ProductoDigital) {
-            this.producto = (ProductoDigital) producto;
-        }
+    public void setProducto(ProductoDigital producto) {
+        this.producto = producto;
     }
 
-    @Override
-    public Producto getProducto() {
+    public ProductoDigital getProducto() {
         return producto;
     }
 
