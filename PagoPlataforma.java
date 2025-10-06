@@ -10,7 +10,13 @@ public class PagoPlataforma implements IProcesoPago {
      * @param nombre
      * @param total
      */
-    public PagoPlataforma(String nombre, float total) {
+    public PagoPlataforma(String nombre, float total) throws IllegalArgumentException {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre viene vacío");
+        }
+        if (total <= 0.0f) {
+            throw new IllegalArgumentException("El total debe ser positivo");
+        }
         this.nombre = nombre;
         this.total = total;
     }
@@ -22,7 +28,7 @@ public class PagoPlataforma implements IProcesoPago {
 
     @Override
     public boolean verificarPago() {
-        System.out.println("Verificando que exista la cuenta " + nombre + "... Espere un momento");
+        System.out.println("Verificando que exista la plataforma " + nombre + "... Espere un momento");
         System.out.println("Verificando que tenga saldo... Espere un momento");
         return true;
     }

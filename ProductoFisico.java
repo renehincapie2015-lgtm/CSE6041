@@ -2,7 +2,7 @@ package eIlumage;
 
 public class ProductoFisico extends Producto {
     
-    private float peso = 0.0f;
+    private float peso;
     private String dimensiones;
     private String color;
 

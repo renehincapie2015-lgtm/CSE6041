@@ -6,7 +6,7 @@ package eIlumage;
 public class Articulo {
 
     private Stock stock;
-    private float subTotal = Float.parseFloat("0");
+    private float subTotal = 0.0f;
 
     /**
      *
@@ -14,7 +14,11 @@ public class Articulo {
      */
     public Articulo(Stock stock) {
         this.stock = stock;
-        this.subTotal = this.stock.getProducto().getValor() * this.stock.getCantidad();
+        if (stock instanceof StockFisico) {
+            this.subTotal = ((StockFisico) this.stock).getProducto().getValor() * this.stock.getCantidad();
+        } else if (stock instanceof StockDigital) {
+            this.subTotal = ((StockDigital) this.stock).getProducto().getValor() * this.stock.getCantidad();
+        }
     }
 
     public Stock getStock() {

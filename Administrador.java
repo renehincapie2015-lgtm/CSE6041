@@ -21,12 +21,10 @@ public class Administrador extends Usuario {
      */
     public void getCliente(int numeroDocumento) {
         int pos = 0;
-        boolean encontrado = false;
 
-        while (!encontrado && pos < count) {
+        while (pos < count) {
             if (clientes[pos].getNumeroDocumento() == numeroDocumento) {
                 cliente = clientes[pos];
-                encontrado = true;
                 break;
             }
             pos++;
@@ -53,22 +51,12 @@ public class Administrador extends Usuario {
      * @param codigo
      */
     public void getPedido(int numeroDocumento, int codigo) {
-        int pos = 0;
-        boolean encontrado = false;
-
-        while (!encontrado && pos < count) {
-            if (clientes[pos].getNumeroDocumento() == numeroDocumento) {
-                cliente = clientes[pos];
-                pedido = cliente.getPedido(codigo);
-                encontrado = true;
-                break;
+        getCliente(numeroDocumento);
+        if (cliente != null) {
+            pedido = cliente.getPedido(codigo);
+            if (pedido == null) {
+                System.out.println("No existe el Pedido");
             }
-            pos++;
-        }
-        if (pos == count) {
-            cliente = null;
-            pedido = null;
-            System.out.println("No existe el Cliente");
         }
     }
 

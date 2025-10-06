@@ -19,16 +19,8 @@ public abstract class Producto {
      */
     public Producto(String nombre, float valor) {
         this.codigo = ++Producto.consecutivo;
-        if (nombre == null || nombre.trim().isEmpty()) {
-            System.out.println("El nombre viene vacío");
-        } else {
-            this.nombre = nombre.trim();
-        }
-        if (valor <= 0.0f) {
-            System.out.println("El valor debe ser positivo");
-        } else {
-            this.valor = valor;
-        }
+        setNombre(nombre);
+        setValor(valor);
         this.caracteristicas = new Caracteristica[5];
     }
 
@@ -46,12 +38,11 @@ public abstract class Producto {
      *
      * @param nombre
      */
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws IllegalArgumentException {
         if (nombre == null || nombre.trim().isEmpty()) {
-            System.out.println("El nombre viene vacío");
-        } else {
-            this.nombre = nombre.trim();
+            throw new IllegalArgumentException("Nombre de Producto viene vacío");
         }
+        this.nombre = nombre.trim();
     }
 
     public float getValor() {
@@ -62,11 +53,9 @@ public abstract class Producto {
      *
      * @param valor
      */
-    public void setValor(float valor) {
+    public void setValor(float valor) throws IllegalArgumentException {
         if (valor <= 0.0f) {
-            System.out.println("El valor debe ser positivo");
-        } else {
-            this.valor = valor;
+            throw new IllegalArgumentException("Precio del Producto debe ser positivo");
         }
     }
 
@@ -75,24 +64,20 @@ public abstract class Producto {
      * @param nombre
      * @return
      */
-    public Caracteristica getCaracteristica(String nombre) {
+    public Caracteristica getCaracteristica(String nombre) throws IllegalArgumentException {
         int pos = 0;
 
         if (nombre == null || nombre.trim().isEmpty()) {
-            System.out.println("El nombre de la Característica viene vacío");
-            return null;
-        } else {
-            while (true) {
-                if (caracteristicas[pos].getNombre().equals(nombre)) {
-                    return caracteristicas[pos];
-                }
-                pos++;
-                if (pos == count) {
-                    System.out.println(nombre + " no ha sido asignado o no describe este Producto");
-                    return null;
-                }
-            }
+            throw new IllegalArgumentException("Nombre de Característica viene vacío");
         }
+        while (pos < count) {
+            if (caracteristicas[pos].getNombre().equals(nombre)) {
+                return caracteristicas[pos];
+            }
+            pos++;
+        }
+        System.out.println(nombre + " no ha sido asignado o no describe este Producto");
+        return null;
     }
 
     /**
@@ -100,28 +85,25 @@ public abstract class Producto {
      * @param nombre
      * @param valor
      */
-    public void setCaracteristica(String nombre, String valor) {
+    public void setCaracteristica(String nombre, String valor) throws IllegalArgumentException {
         int pos = 0;
 
         if (nombre == null || nombre.trim().isEmpty()) {
-            System.out.println("El nombre de la Característica viene vacío");
-        } else {
-            if (valor == null || valor.trim().isEmpty()) {
-                System.out.println("El valor de la Característica viene vacío");
-            } else {
-                while (true) {
-                    if (caracteristicas[pos].getNombre().equals(nombre)) {
-                        caracteristicas[pos].setValor(valor);
-                        break;
-                    }
-                    pos++;
-                    if (pos == count) {
-                        caracteristicas[count] = new Caracteristica(nombre, valor);
-                        count++;
-                        break;
-                    }
-                }
+            throw new IllegalArgumentException("Nombre de Característica viene vacío");
+        }
+        if (valor == null || valor.trim().isEmpty()) {
+            throw new IllegalArgumentException("Valor de Característica viene vacío");
+        }
+        while (pos < count) {
+            if (caracteristicas[pos].getNombre().equals(nombre)) {
+                caracteristicas[pos].setValor(valor);
+                break;
             }
+            pos++;
+        }
+        if (pos == count) {
+            caracteristicas[count] = new Caracteristica(nombre, valor);
+            count++;
         }
     }
 

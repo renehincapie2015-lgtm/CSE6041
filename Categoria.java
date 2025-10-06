@@ -42,16 +42,14 @@ public class Categoria {
     public Producto getProducto(String nombre) {
         int pos = 0;
 
-        while (true) {
+        while (pos < this.count) {
             if (productos[pos].getNombre().equals(nombre)) {
                 return productos[pos];
             }
             pos++;
-            if (pos == this.count) {
-                System.out.println("Producto llamado " + nombre + " no existe o no pertenece a esta Categoría");
-                return null;
-            }
         }
+        System.out.println("Producto llamado " + nombre + " no existe o no pertenece a esta Categoría");
+        return null;
     }
 
     /**
