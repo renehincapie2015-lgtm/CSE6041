@@ -57,6 +57,7 @@ public abstract class Producto {
         if (valor <= 0.0f) {
             throw new IllegalArgumentException("Precio del Producto debe ser positivo");
         }
+        this.valor = valor;
     }
 
     /**

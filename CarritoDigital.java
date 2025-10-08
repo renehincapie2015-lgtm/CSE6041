@@ -129,6 +129,7 @@ public class CarritoDigital extends Carrito {
                 producto.setValor(valor);
                 this.total += valor * cantidad;
                 stock.setProducto(producto);
+                articulos[pos].setStock(stock);
                 break;
             }
             pos++;
