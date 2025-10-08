@@ -148,12 +148,6 @@ public class Ilumage {
         bob.addPedidoDigital("Pagado");
 
         System.out.println("********************************");
-        System.out.println("*** Se desecha los carritos ******");
-        System.out.println("********************************\n");
-        alice.deleteCarritoFisico();
-        bob.deleteCarritoDigital();
-
-        System.out.println("********************************");
         System.out.println("*** El administrador procesa a Alice ***");
         System.out.println("********************************\n");
         rene.getPedido(33333333, 1);
@@ -174,6 +168,12 @@ public class Ilumage {
         rene.setEstadoPedido("Entregado");
         System.out.println("********************************");
         rene.sendSMSPedido();
+
+        System.out.println("********************************");
+        System.out.println("*** Se desecha los carritos ******");
+        System.out.println("********************************\n");
+        alice.deleteCarritoFisico();
+        bob.deleteCarritoDigital();
 
     }
 }

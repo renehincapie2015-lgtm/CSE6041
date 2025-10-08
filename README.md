@@ -137,7 +137,7 @@ Se adjuntan las modificaciones al diagrama de clases:
 
 ### Semana 8 Manejo de Excepciones y Pruebas Unitarias
 
-####Manejo de Excepciones:
+###Manejo de Excepciones:
 Se agregaron excepciones básicas como controlar cantidades o precios negativos, formatos no cumplidos, argumentos vacíos, inventarios mayores al límite. Como desafío queda el que hay muchas validaciones y excepciones similares, por lo que sería mejor una clase Validador que centralice los controles, pero queda por fuera del alcance de la tarea.
 
 ![Excepcion01](https://github.com/user-attachments/assets/460bacfc-ea21-46a7-96c8-6b04f0f65d13)
@@ -154,7 +154,7 @@ Se agregaron excepciones básicas como controlar cantidades o precios negativos,
 ![Excepcion12](https://github.com/user-attachments/assets/126830d9-938c-4bea-bf3b-d2680110070c)
 ![Excepcion13](https://github.com/user-attachments/assets/a1a951c8-e468-469f-9a1d-5cc6a7496139)
 
-####Pruebas Unitarias:
+###Pruebas Unitarias:
 Hubo varios desafíos con este punto. Primero se detectó que la última versión de JUnit, la 5, no corre nativamente con el Builder estándar de Apache NetBeans, que es Ant, y se deben hacer más ajustes. Tocaría instalar los Builders Maven o Gradle, con los que sí es compatible. No se dispone de tiempo para realizar más instalaciones, pero se logra encontrar la solución de realizar tests con JUnit 4, lo cual permite hacer pruebas más rápido y sin instalaciones adicionales. El segundo y más grande desafío es que al probar algunas clases por fuera de la aplicación empezaron a fallar y la primera solución consistió en seguir separando métodos en versión Digital y Física, lo que retrasa más la entrega. Esto incluye que el main ya no realiza llamados a los carritos, sino la clase Cliente se encarga de sus carritos. Y, en tercer lugar, sin detectarse la causa real, los productos al agregarse a sus respectivos carritos quedaban con valor cero, sin afectar los demás atributos. Se tuvo que crear un método adicional en cada carrito para asignar nuevamente el valor.
 ![JUnit01](https://github.com/user-attachments/assets/717bc8ef-4c4a-4638-b81e-861313384042)
 ![JUnit02](https://github.com/user-attachments/assets/df3881b1-8b6c-4186-b820-27439ccbd64d)
@@ -171,3 +171,11 @@ Hubo varios desafíos con este punto. Primero se detectó que la última versió
 ![JUnit13](https://github.com/user-attachments/assets/84d8f2a6-89d4-4a4e-94ff-1d84232be5c9)
 ![JUnit14](https://github.com/user-attachments/assets/b3ea03e0-17b8-422c-8a33-f1b33af3466d)
 ![JUnit15](https://github.com/user-attachments/assets/7f611e6f-ae2d-447f-ab03-73f6b502062a)
+
+### Semana 10 Entrega final
+
+Se adjuntan la presentación final y capturas de la ejecución standalone de la aplicación.
+![Ejecucion04](https://github.com/user-attachments/assets/5320aeb8-beaf-4c25-a41e-01496a0f0014)
+![Ejecucion03](https://github.com/user-attachments/assets/9575a741-8bf4-49ab-a58e-a4615a55024f)
+![Ejecucion02](https://github.com/user-attachments/assets/052f81c8-3de4-405d-8dc5-229640018d8c)
+![Ejecucion01](https://github.com/user-attachments/assets/2475d097-4e04-4af6-afd7-014169606322)
